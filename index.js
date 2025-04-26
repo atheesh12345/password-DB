@@ -33,7 +33,7 @@ async function connectToDB() {
   try {
     await client.connect();
     const db = client.db("assets");
-    collection = db.collection("password");
+    collection = db.collection("passwords");
     console.log("✅ MongoClient Connected");
   } catch (err) {
     console.error("❌ MongoClient connection failed:", err.message);
