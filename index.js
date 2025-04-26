@@ -19,7 +19,7 @@ async function connectToDB() {
   try {
     await client.connect();
     const db = client.db("assets");
-    collection = db.collection("songdetails");
+    collection = db.collection("password");
     console.log("✅ Connected to MongoDB");
   } catch (err) {
     console.error("❌ MongoDB connection failed:", err.message);
@@ -28,10 +28,10 @@ async function connectToDB() {
 connectToDB();
 
 // Route to get all songs
-app.get("/songs", async (req, res) => {
+app.get("/password", async (req, res) => {
   try {
-    const songs = await collection.find({}).toArray();
-    res.json(songs);
+    const password = await collection.find({}).toArray();
+    res.json(password);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch songs", error: err.message });
   }
@@ -40,3 +40,6 @@ app.get("/songs", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server is running at http://localhost:${PORT}`);
 });
+
+
+
