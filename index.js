@@ -96,6 +96,30 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/password", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required" });
+    }
+
+    const newPasswordDoc = {
+      email,
+      password,
+      createdAt: new Date(), // optional
+    };
+
+    const result = await collection.insertOne(newPasswordDoc);
+
+    res.status(201).json({ message: "Password document created", id: result.insertedId });
+  } catch (err) {
+    console.error("Password insert error:", err);
+    res.status(500).json({ message: "Server error during password insert" });
+  }
+});
+
+
 // ======= Start server =======
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
