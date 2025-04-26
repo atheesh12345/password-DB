@@ -19,7 +19,7 @@ async function connectToDB() {
   try {
     await client.connect();
     const db = client.db("assets");
-    collection = db.collection("password");
+    collection = db.collection("passwords");
     console.log("✅ Connected to MongoDB");
   } catch (err) {
     console.error("❌ MongoDB connection failed:", err.message);
